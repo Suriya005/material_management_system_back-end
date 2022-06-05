@@ -1,0 +1,31 @@
+{
+  "name": "material_management_system_back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suriya005/material_management_system_back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suriya005/material_management_system_back-end/issues"
+  },
+  "homepage": "https://github.com/Suriya005/material_management_system_back-end#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "fastify": "^3.29.0",
+    "fastify-cors": "^6.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mssql": "^8.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
