@@ -10,6 +10,7 @@ const userRoutes = (app) => {
     app.put("/api/v1/users/password", hooks.validate.changePassword, controllers.employees.changePassword);
     app.delete("/api/v1/users/:id", hooks.validate.delectUser, controllers.employees.remove);
     app.post("/api/v1/users/login",hooks.validate.login, controllers.employees.login);
+    app.get("/api/v1/users/me", hooks.validate.me, controllers.employees.me);
 }
 
 module.exports = {userRoutes};

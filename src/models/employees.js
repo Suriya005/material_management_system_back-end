@@ -116,6 +116,8 @@ const generateToken = async (data) => {
       id: data.emp_id,
       username: data.emp_username,
       status: data.emp_status,
+      fname: data.emp_fname,
+      lname: data.emp_lname,
     },
     config.secret,
     {
@@ -149,6 +151,27 @@ const changePassword = async (data) => {
   } catch (err) {}
 };
 
+const me = async (authorization) => {
+  try {
+    const token = authorization.split(" ")[1];
+    const decoded = await jwt.verify(token, config.secret);
+    
+    return {
+      id: decoded.id,
+      username: decoded.username,
+      status: decoded.status,
+      fname: decoded.fname,
+      lname: decoded.lname,
+    };
+  } catch (err) {
+    return {
+      massage: "Invalid token",
+    };
+  }
+};
+
+
+
 module.exports = {
   getAll,
   create,
@@ -158,4 +181,5 @@ module.exports = {
   remove,
   login,
   changePassword,
+  me,
 };

@@ -80,6 +80,24 @@ const getOneUser = {
   },
 };
 
+const me = {
+  schema: {
+    response: {
+      200: {
+        type: "object",
+        properties: {
+          fname: { type: "string" },
+          lname: { type: "string" },
+          id: { type: "integer" },
+          username: { type: "string" },
+          status: { type: "string" },
+        },
+      },
+    },
+  },
+  preHandler: validate.validateToken,
+};
+
 const updateUser = {
   schema: {
     body: {
@@ -164,4 +182,5 @@ module.exports = {
   updateUserByAdmin,
   changePassword,
   delectUser,
+  me,
 };
