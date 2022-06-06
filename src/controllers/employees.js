@@ -13,8 +13,13 @@ const getOne = async (req, res) => {
     res.send(result);
 }
 
-const update = async (req, res) => {
-    const result = await employeesModels.update(req.body);
+const updateUserById = async (req, res) => {
+    const result = await employeesModels.updateUserById(req.body);
+    res.send(result);
+}
+
+const updateUserByAdmin = async (req, res) => {
+    const result = await employeesModels.updateUserByAdmin(req.body);
     res.send(result);
 }
 
@@ -25,6 +30,12 @@ const remove = async (req, res) => {
 
 const login = async (req, res) => {
     const result = await employeesModels.login(req.body);
+    console.log(result);
+    res.send(result);
+}
+
+const changePassword = async (req, res) => {
+    const result = await employeesModels.changePassword(req.body);
     res.send(result);
 }
 
@@ -32,7 +43,9 @@ module.exports = {
     getAll,
     create,
     getOne,
-    update,
+    updateUserById,
+    updateUserByAdmin,
     remove,
-    login
+    login,
+    changePassword
 }
