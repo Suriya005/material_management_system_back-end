@@ -8,7 +8,7 @@ const validateToken = async (req, res) => {
       throw new Error("missing authorization header");
     }
     const token = authorization.split(" ")[1];
-    console.log(jwt.decode(token));
+    // console.log(jwt.decode(token));
   } catch (err) {
     res.statusCode = 401;
     throw err;
@@ -25,7 +25,7 @@ const validateTokenAdmin = async (req, res, next) => {
     }
     const token = authorization.split(" ")[1];
     const deToken = jwt.decode(token);
-    console.log(deToken);
+    // console.log(deToken);
     if (deToken.status != "admin") {
       throw new Error("You haven't status Addmin");
     }
@@ -44,7 +44,7 @@ const validateTokenById = async (req, res, next) => {
     }
     const token = authorization.split(" ")[1];
     const deToken = jwt.decode(token);
-    console.log(deToken);
+    // console.log(deToken);
     if (deToken.id == req.body.id) {
       next();
     } else {

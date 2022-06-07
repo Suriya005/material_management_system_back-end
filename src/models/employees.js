@@ -60,7 +60,6 @@ const updateUserById = async (data) => {
 
 const updateUserByAdmin = async (data) => {
   try {
-    console.log(data);
     const db = await sql.connect(config.db);
     const result =
       await db.query`update employees_tb set emp_fname = ${data.fname}, emp_lname = ${data.lname}, emp_sex = ${data.sex}, emp_status = ${data.status}, emp_username = ${data.username} where emp_id = ${data.id}`;
