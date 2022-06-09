@@ -1,6 +1,7 @@
 const employees = require('./employees')
-const material = require('./material')
+const materials = require('./materials')
 
 module.exports = {
-    employees
+    employees,
+    materials
 }

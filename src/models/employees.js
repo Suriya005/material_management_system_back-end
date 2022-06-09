@@ -120,7 +120,7 @@ const generateToken = async (data) => {
     },
     config.secret,
     {
-      expiresIn: "5m",
+      expiresIn: "30m",
     }
   );
   return token;
@@ -154,7 +154,7 @@ const me = async (authorization) => {
   try {
     const token = authorization.split(" ")[1];
     const decoded = await jwt.verify(token, config.secret);
-    
+    console.log("call me")
     return {
       id: decoded.id,
       username: decoded.username,

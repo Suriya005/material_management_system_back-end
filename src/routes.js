@@ -9,8 +9,12 @@ const userRoutes = (app) => {
     app.put("/api/v1/users/admin", hooks.validate.updateUserByAdmin, controllers.employees.updateUserByAdmin);
     app.put("/api/v1/users/password", hooks.validate.changePassword, controllers.employees.changePassword);
     app.delete("/api/v1/users/:id", hooks.validate.delectUser, controllers.employees.remove);
-    app.post("/api/v1/users/login",hooks.validate.login, controllers.employees.login);
+    app.post("/api/v1/users/login", hooks.validate.login, controllers.employees.login);
     app.get("/api/v1/users/me", hooks.validate.me, controllers.employees.me);
+
+    app.get("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.getAll);
+    app.post("/api/v1/materials/search", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.search);
+   
 }
 
-module.exports = {userRoutes};
+module.exports = { userRoutes };

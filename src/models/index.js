@@ -1,5 +1,5 @@
 const employees = require('./employees')
-const material = require('./material')
+const material = require('./materials')
 
 module.exports = {
     employees,
