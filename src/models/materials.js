@@ -7,7 +7,7 @@ const getAll = async () => {
   try {
     const db = await sql.connect(config.db);
     const result =
-      await db.query`select * from material_tb where material_type = 'ไม่ต้องคืน'`;
+      await db.query`select * from material_tb`;
     return result.recordset;
   } catch (err) {
     console.log(err);
@@ -47,7 +47,19 @@ const search = async (search, materialType) => {
   }
 };
 
+const update = async (editData) => {
+  try {
+    const db = await sql.connect(config.db);
+    const result = await db
+      .query`update material_tb set material_name = ${editData.material_name}, material_type = ${editData.material_type}, material_unit = ${editData.material_unit}, material_qty = ${editData.material_qty} where material_id = ${editData.material_id}`;
+    return result.recordset;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   getAll,
   search,
+  update
 };
