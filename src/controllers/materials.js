@@ -19,8 +19,14 @@ const update = async (req, res) => {
   res.send(result);
 }
 
+const remove = async (req, res) => {
+  const result = await materialModel.remove(req.params.id);
+  res.send(result);
+}
+
 module.exports = {
   getAll,
   search,
-  update
+  update,
+  remove
 };
