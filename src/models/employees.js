@@ -83,6 +83,7 @@ const remove = async (id) => {
 
 const login = async (data) => {
   try {
+    console.log(data)
     const db = await sql.connect(config.db);
     const result =
       await db.query`select * from employees_tb where emp_username = ${data.username}`;

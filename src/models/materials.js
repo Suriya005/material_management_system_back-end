@@ -7,9 +7,9 @@ const getAll = async () => {
   try {
     const db = await sql.connect(config.db);
     const result = await db.query`select * from material_tb`;
-    return result.recordset;
+    return { massage: "get all successfuly", data: result.recordset };
   } catch (err) {
-    console.log(err);
+    return { massage: "get all fail", err };
   }
 };
 
@@ -23,11 +23,11 @@ const search = async (search, materialType) => {
           `select * from material_tb where material_name LIKE ${searchData}`
         )
         .then((result) => {
-          return result.recordset;
+          return { massage: "search successfuly", data: result.recordset };
         });
       return result;
     } catch (err) {
-      console.log(err);
+      return { massage: "search fail", err };
     }
   } else {
     try {
@@ -37,11 +37,11 @@ const search = async (search, materialType) => {
           `select * from material_tb where material_name LIKE ${searchData} and material_type = '${materialType}'`
         )
         .then((result) => {
-          return result.recordset;
+          return { massage: "search successfuly", data: result.recordset };
         });
       return result;
     } catch (err) {
-      console.log(err);
+      return { massage: "search fail", err };
     }
   }
 };
@@ -49,11 +49,11 @@ const search = async (search, materialType) => {
 const update = async (editData) => {
   try {
     const db = await sql.connect(config.db);
-    const result =
+
       await db.query`update material_tb set material_name = ${editData.material_name}, material_type = ${editData.material_type}, material_unit = ${editData.material_unit}, material_qty = ${editData.material_qty} where material_id = ${editData.material_id}`;
-    return result.recordset;
+    return { massage: "update successfuly" };
   } catch (err) {
-    console.log(err);
+    return { massage: "update fail", err };
   }
 };
 
@@ -73,20 +73,12 @@ const remove = async (id) => {
 };
 
 const createMaterial = async (data) => {
-  // try {
-  //   const db = await sql.connect(config.db);
-  //   console.log(data.material_name);
-  //   await db.query`insert into material_tb (material_name, material_type, material_unit, material_qty) values (${data.material_name}, ${data.material_type}, ${data.material_unit}, ${data.material_qty})`;
-  //   return { massage: "create successfuly" };
-  // } catch (err) {
-  //   console.log(err);
-  // }
   try {
     const db = await sql.connect(config.db);
-    const result = await db.query`insert into material_tb (material_name, material_type, material_unit, material_qty) values (${data.material_name}, ${data.material_type}, ${data.material_unit}, ${data.material_qty})`;
-    return result.recordset;
+    await db.query`insert into material_tb (material_name, material_type, material_unit, material_qty) values (${data.material_name}, ${data.material_type}, ${data.material_unit}, ${data.material_qty})`;
+    return { massage: "create successfuly" };
   } catch (err) {
-    console.log(err);
+    return { massage: "create fail", err };
   }
 };
 

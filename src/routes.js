@@ -12,11 +12,11 @@ const userRoutes = (app) => {
     app.post("/api/v1/users/login", hooks.validate.login, controllers.employees.login);
     app.get("/api/v1/users/me", hooks.validate.me, controllers.employees.me);
 
-    app.get("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.getAll);
-    app.post("/api/v1/materials/search", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.search);
-    app.put("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.update);
-    app.delete("/api/v1/materials/:id",  controllers.materials.remove);
-    app.post("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.createMaterial);
+    app.get("/api/v1/materials", hooks.materialOpt.getAll, controllers.materials.getAll);
+    app.post("/api/v1/materials/search", hooks.materialOpt.search, controllers.materials.search);
+    app.put("/api/v1/materials", hooks.materialOpt.update, controllers.materials.update);
+    app.delete("/api/v1/materials/:id", hooks.materialOpt.remove,  controllers.materials.remove);
+    app.post("/api/v1/materials", hooks.materialOpt.createMaterial, controllers.materials.createMaterial);
    
 }
 

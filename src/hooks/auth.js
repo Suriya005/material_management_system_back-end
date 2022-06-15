@@ -8,7 +8,10 @@ const validateToken = async (req, res) => {
       throw new Error("missing authorization header");
     }
     const token = authorization.split(" ")[1];
-    // console.log(jwt.decode(token));
+    const deToken = jwt.decode(token);
+    if(deToken == undefined){
+      throw new Error("You haven't token");
+    }
   } catch (err) {
     res.statusCode = 401;
     throw err;
@@ -16,7 +19,7 @@ const validateToken = async (req, res) => {
 };
 
 // ตรวจสอบ token ของ Admin
-const validateTokenAdmin = async (req, res, next) => {
+const validateTokenAdmin = async (req, res) => {
   try {
     const { authorization } = req.headers;
 
@@ -29,14 +32,13 @@ const validateTokenAdmin = async (req, res, next) => {
     if (deToken.status != "admin") {
       throw new Error("You haven't status Addmin");
     }
-    next();
   } catch (err) {
     res.statusCode = 401;
     throw err;
   }
 };
 
-const validateTokenById = async (req, res, next) => {
+const validateTokenById = async (req, res) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
@@ -45,8 +47,8 @@ const validateTokenById = async (req, res, next) => {
     const token = authorization.split(" ")[1];
     const deToken = jwt.decode(token);
     // console.log(deToken);
-    if (deToken.id == req.body.id) {
-      next();
+    if (deToken.id != req.body.id) {
+      throw new Error("This ID is not your");
     } else {
       throw new Error("You haven't permission");
     }
