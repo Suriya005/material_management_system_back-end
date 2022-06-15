@@ -59,6 +59,7 @@ const update = async (editData) => {
 
 const remove = async (id) => {
   try {
+    console.log("delete id: " + id);
     const db = await sql.connect(config.db);
     await db.query`delete from material_tb where material_id = ${id}`;
     return {
@@ -71,9 +72,28 @@ const remove = async (id) => {
   }
 };
 
+const createMaterial = async (data) => {
+  // try {
+  //   const db = await sql.connect(config.db);
+  //   console.log(data.material_name);
+  //   await db.query`insert into material_tb (material_name, material_type, material_unit, material_qty) values (${data.material_name}, ${data.material_type}, ${data.material_unit}, ${data.material_qty})`;
+  //   return { massage: "create successfuly" };
+  // } catch (err) {
+  //   console.log(err);
+  // }
+  try {
+    const db = await sql.connect(config.db);
+    const result = await db.query`insert into material_tb (material_name, material_type, material_unit, material_qty) values (${data.material_name}, ${data.material_type}, ${data.material_unit}, ${data.material_qty})`;
+    return result.recordset;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getAll,
   search,
   update,
-  remove
+  remove,
+  createMaterial,
 };

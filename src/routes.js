@@ -15,7 +15,8 @@ const userRoutes = (app) => {
     app.get("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.getAll);
     app.post("/api/v1/materials/search", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.search);
     app.put("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.update);
-    app.delete("/api/v1/materials/:id", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.remove);
+    app.delete("/api/v1/materials/:id",  controllers.materials.remove);
+    app.post("/api/v1/materials", {preHandler:hooks.auth.validateTokenAdmin}, controllers.materials.createMaterial);
    
 }
 
